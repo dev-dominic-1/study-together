@@ -1,22 +1,46 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AccountView from "../views/AccountView.vue";
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Home',
+    component: HomeView,
+    icon: 'mdi-home-outline',
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/search',
+    name: 'Search',
+    icon: 'mdi-magnify',
+    disabled: true
+  },
+  {
+    path: '/notifications',
+    name: 'Notifications',
+    icon: 'mdi-bell-outline',
+    disabled: true
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    icon: 'mdi-message-text-outline',
+    disabled: true
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: AccountView,
+    icon: 'mdi-account-circle-outline'
+  },
+  {
+    path: '/create-post',
+    name: 'Create Post',
+    icon: 'mdi-plus-box-outline',
+    disabled: true
   }
 ]
 
