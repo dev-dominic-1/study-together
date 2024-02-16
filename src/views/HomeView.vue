@@ -3,9 +3,9 @@
     <v-toolbar elevation="1" color="transparent" height="96px" class="toolbar">
       <v-row no-gutters>
         <v-spacer />
-        <v-col cols="12" md="8" class="pb-0 mb-n16">
+        <v-col cols="12" md="10" class="pb-0 mb-n16">
           <v-tabs v-model="tab" color="text" background-color="transparent">
-            <v-tab class="text-capitalize heading-2" :key="TRENDING">
+            <v-tab class="text-capitalize heading-2" :key="TRENDING" disabled>
               {{ TRENDING.toLowerCase() }}
             </v-tab>
             <v-tab class="text-capitalize heading-2" :key="FRIENDS">
@@ -16,11 +16,36 @@
         <v-spacer />
       </v-row>
     </v-toolbar>
+    <v-tabs-items v-model="tab" style="background-color: transparent">
+        <v-tab-item :key="TRENDING">
+          {{ TRENDING }}
+        </v-tab-item>
+      <v-tab-item :key="FRIENDS">
+        <v-row no-gutters>
+          <v-spacer />
+          <v-col cols="12" md="10">
+            <v-autocomplete
+              v-model="contentPreference"
+              :items="[
+                {text: 'Most Recent', value: MOST_RECENT},
+                {text: 'Most Relevant', value: MOST_RELEVANT}
+              ]"
+              rounded
+              color="text"
+              append-icon="mdi-chevron-down"
+              class="content-preference body-4"
+            />
+          </v-col>
+          <v-spacer />
+        </v-row>
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
 <script>
 const [FRIENDS, TRENDING] = ['FRIENDS', 'TRENDING']
+const [MOST_RECENT, MOST_RELEVANT] = ['MOST_RECENT', 'MOST_RELEVANT']
 export default {
   name: 'HomeView',
   data () {
@@ -29,12 +54,15 @@ export default {
       tabs: [
         {text: 'Trending', value: TRENDING},
         {text: 'Friends', value: FRIENDS}
-      ]
+      ],
+      contentPreference: MOST_RECENT,
     }
   },
   computed: {
     TRENDING () {return TRENDING},
     FRIENDS () {return FRIENDS},
+    MOST_RECENT () {return MOST_RECENT},
+    MOST_RELEVANT () {return MOST_RELEVANT}
   }
 }
 </script>
@@ -58,5 +86,9 @@ export default {
 }
 .v-tab:not(.v-tab--active) {
   font-weight: normal;
+}
+.content-preference {
+  width: 210px;
+  font-size: 18px !important;
 }
 </style>
