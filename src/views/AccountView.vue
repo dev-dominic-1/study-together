@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="header" />
-    <v-row no-gutters>
+    <v-row no-gutters style="min-height: 200px">
       <v-spacer />
       <v-col cols="12" md="10">
         <v-sheet class="bio-wrapper">
@@ -51,18 +51,61 @@
       </v-col>
       <v-spacer />
     </v-row>
+    <v-row no-gutters>
+      <v-spacer />
+      <v-col cols="4" class="px-3">
+        <div class="d-flex justify-space-between">
+          <div>
+            <div class="heading-1">Friends</div>
+            <div>{{ `${user.friends.length} Friends` }}</div>
+          </div>
+          <span class="body-4">See All Friends</span>
+        </div>
+      </v-col>
+      <v-col cols="6" class="px-3">
+        <span class="heading-1">Posts</span>
+      </v-col>
+      <v-spacer />
+    </v-row>
+    <v-row no-gutters>
+      <v-spacer />
+      <v-col cols="4">
+        <v-row no-gutters>
+          <v-col
+            v-for="(friend, index) of user.friends"
+            :key="`friend-card-${index}`"
+            cols="4"
+            class="px-2 pt-3"
+          >
+            <friend-card v-bind="{friend}" />
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="6">
+        <post-card
+          v-for="(post, index) of user.posts"
+          :key="`user-post-${index}`"
+          v-bind="{post}"
+        />
+      </v-col>
+      <v-spacer />
+    </v-row>
   </div>
 </template>
 
 <script>
 
+import FriendCard from "@/components/FriendCard.vue";
+import PostCard from "@/components/PostCard.vue";
+
 const PROFILE_PIC_AVOIDANCE_PADDING = '272px'
 
 export default {
   name: 'AccountView',
+  components: {PostCard, FriendCard},
   data () {
     return {
-      profileImage: undefined
+      profileImage: {}
     }
   },
   computed: {
@@ -90,6 +133,7 @@ export default {
   background-repeat: no-repeat;
   background-position: left -8% top 40%, left -13% top 40%, left -5% top 20%;
   background-size: 35%;
+  background-attachment: local;
 }
 .header {
   height: 300px;

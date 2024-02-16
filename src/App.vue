@@ -34,7 +34,7 @@
         </v-list>
       </v-navigation-drawer>
       <v-fade-transition hide-on-leave>
-        <router-view />
+        <router-view style="max-height: 100vh; overflow-y: scroll; overflow-x: hidden;" class="pb-10" />
       </v-fade-transition>
     </div>
     <message-box />
@@ -71,9 +71,8 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 #app {
-  & a {
-    color: aqua;
-    text-decoration: none;
+  & .timestamp {
+    opacity: 0.6;
   }
   display: flex;
   font-family: 'Montserrat', serif;
