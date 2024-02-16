@@ -1,33 +1,49 @@
 <template>
-  <div id="app" :style="themeStyleObject">
-    <v-container fluid class="d-flex">
+  <v-app id="app" :style="themeStyleObject">
+    <div class="d-flex">
       <v-navigation-drawer
+          id="nav-drawer"
           permanent
           :style="{background: $vuetify.theme.currentTheme.background}"
           class="nav-drawer"
+          width="380px"
       >
         <v-list>
           <v-list-item
-              v-for="(el, index) of navElements"
+              v-for="(el, index) of routes"
               :key="`nav-element-${index}`"
-              @click="$router.push(el.to)"
+              :disabled="el.disabled"
+              @click="$router.push(el.path)"
           >
             <v-list-item-content>
-              <div class="d-flex justify-center">
-                <v-icon class="pr-3">{{ el.icon }}</v-icon>
-                <span>{{ el.text }}</span>
-              </div>
+              <v-row
+                  no-gutters
+                  class="align-center"
+              >
+                <v-spacer />
+                <v-col cols="2" class="d-flex justify-center heading-3">
+                  <navigation-icon :disabled="el.disabled" :icon="el.icon" :selected="$route.path === el.path" />
+                </v-col>
+                <v-spacer />
+                <v-col cols="6" class="heading-3">
+                  {{ el.name }}
+                </v-col>
+                <v-spacer />
+              </v-row>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
       <router-view />
-    </v-container>
-  </div>
+    </div>
+  </v-app>
 </template>
 
 <script>
+import {routes} from "@/router";
+import NavigationIcon from "@/components/NavigationIcon.vue";
 export default {
+  components: {NavigationIcon},
   data () {
     return {
       navElements: [
@@ -37,6 +53,7 @@ export default {
     }
   },
   computed: {
+    routes () {return routes},
     themeStyleObject () {
       const theme = this.$vuetify.theme.currentTheme
       return {
@@ -49,6 +66,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 #app {
   & a {
     color: aqua;
@@ -80,7 +98,7 @@ export default {
   }
   & .heading-3 {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 600;
   }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

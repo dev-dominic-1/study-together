@@ -5,17 +5,43 @@ import AboutView from "../views/AboutView.vue";
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Home',
+    component: HomeView,
+    icon: 'mdi-home-outline',
   },
   {
-    path: '/about',
-    name: 'about',
-    component: AboutView,
+    path: '/search',
+    name: 'Search',
+    icon: 'mdi-magnify',
+    disabled: true
   },
+  {
+    path: '/notifications',
+    name: 'Notifications',
+    icon: 'mdi-bell-outline',
+    disabled: true
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    icon: 'mdi-message-text-outline',
+    disabled: true
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: AboutView,
+    icon: 'mdi-account-circle-outline'
+  },
+  {
+    path: '/create-post',
+    name: 'Create Post',
+    icon: 'mdi-plus-box-outline',
+    disabled: true
+  }
 ]
 
 const router = new VueRouter({
