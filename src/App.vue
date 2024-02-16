@@ -33,7 +33,9 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <router-view />
+      <v-fade-transition hide-on-leave>
+        <router-view />
+      </v-fade-transition>
     </div>
     <message-box />
   </v-app>
@@ -104,6 +106,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   & .nav-drawer {
+    z-index: 2;
     min-height: 100vh;
     max-height: 100vh;
   }
