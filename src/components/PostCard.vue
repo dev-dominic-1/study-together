@@ -27,7 +27,7 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <hr class="divider">
+<!--    <hr class="divider">-->
     <v-card-actions class="justify-space-between top-shadow">
       <v-icon>mdi-heart</v-icon>
       <span class="body-1">Comment</span>
