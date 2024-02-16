@@ -7,14 +7,21 @@
         <v-sheet class="bio-wrapper">
           <div
             class="profile-image"
-            :style="profileImageStyles"
-          />
+            :style="{
+              border: `4px solid ${this.$vuetify.theme.currentTheme.primary}`
+            }"
+          >
+            <img
+              :alt="`${user.name} Profile Picture`"
+              :src="profileImage.src"
+            >
+          </div>
           <v-row no-gutters>
             <div :style="{'padding-left': PROFILE_PIC_AVOIDANCE_PADDING, width: '100%'}" class="d-flex justify-space-between">
               <div class="bio-title">
-                <div class="heading-3">Troy Bennett</div>
-                <div>Greendale Community College</div>
-                <div>Air Conditioning Repair</div>
+                <div class="heading-3">{{ user.name }}</div>
+                <div>{{ user.university }}</div>
+                <div>{{ user.field }}</div>
               </div>
               <div class="btn-container">
                 <v-btn
@@ -37,7 +44,7 @@
           </v-row>
           <v-row no-gutters>
             <div class="pt-4" :style="{'padding-left': PROFILE_PIC_AVOIDANCE_PADDING}">
-              Let's join forces and navigate this academic adventure together! 🚀 🤝 #StudentLife #ClassOf2026 #FutureLeadership 🌟
+              {{ user.bio }}
             </div>
           </v-row>
         </v-sheet>
@@ -53,13 +60,23 @@ const PROFILE_PIC_AVOIDANCE_PADDING = '272px'
 
 export default {
   name: 'AccountView',
+  data () {
+    return {
+      profileImage: undefined
+    }
+  },
   computed: {
-    profileImageStyles () {
-      return {
-        border: `4px solid ${this.$vuetify.theme.currentTheme.primary}`
-      }
-    },
     PROFILE_PIC_AVOIDANCE_PADDING () {return PROFILE_PIC_AVOIDANCE_PADDING},
+    user () {
+      return this.$store.state.user
+    }
+  },
+  mounted () {
+    import(`@/assets/Images/Desktop/Profile/2x/${this.user.image}`).then(r => {
+      let img = new Image()
+      img.onload = () => this.profileImage = img
+      img.src = r.default
+    })
   }
 }
 </script>
@@ -92,9 +109,11 @@ export default {
     width: 250px;
     background: white;
     border-radius: 10px;
-    background-image: url(../assets/Images/Desktop/Profile/2x/Profile-Profile-Picture-Desktop2x.jpg);
-    background-size: calc(100% + 24px);
-    background-position: left -12px top -12px;
+    &>img {
+      height: 100%;
+      width: 100%;
+      border-radius: 10px;
+    }
   }
   &>.bio-title {
     display: flex;

@@ -11,6 +11,14 @@ const store = new Vuex.Store({
   },
   state () {
     return {
+      user: {
+        name: 'Troy Bennett',
+        username: 'troy',
+        university: 'Greendale Community College',
+        field: 'Air Conditioning Repair',
+        bio: 'Let\'s join forces and navigate this academic adventure together! 🚀 🤝 #StudentLife #ClassOf2026 #FutureLeadership 🌟',
+        image: 'Profile-Profile-Picture-Desktop2x.jpg',
+      },
       users: [
         {
           name: 'Annie',
