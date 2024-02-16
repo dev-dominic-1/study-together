@@ -4,9 +4,8 @@
       <v-navigation-drawer
           id="nav-drawer"
           permanent
-          :style="{background: $vuetify.theme.currentTheme.background}"
+          :style="{background: $vuetify.theme.currentTheme.background, minWidth: '380px'}"
           class="nav-drawer"
-          width="380px"
       >
         <v-list>
           <v-list-item
