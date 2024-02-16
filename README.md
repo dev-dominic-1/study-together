@@ -1,5 +1,8 @@
 # study-together
 
+## Project Credits
+Designs provided on Figma by my wife, Cassidy Voorhees-Hiland, UI/UX professional.
+
 ## Project setup
 ```
 npm install
