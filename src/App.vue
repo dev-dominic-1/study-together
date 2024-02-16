@@ -5,7 +5,7 @@
           id="nav-drawer"
           permanent
           :style="{background: $vuetify.theme.currentTheme.background, minWidth: '380px'}"
-          class="nav-drawer"
+          class="nav-drawer elevation-3"
       >
         <v-list>
           <v-list-item
@@ -35,14 +35,16 @@
       </v-navigation-drawer>
       <router-view />
     </div>
+    <message-box />
   </v-app>
 </template>
 
 <script>
 import {routes} from "@/router";
 import NavigationIcon from "@/components/NavigationIcon.vue";
+import MessageBox from "@/components/MessageBox.vue";
 export default {
-  components: {NavigationIcon},
+  components: {MessageBox, NavigationIcon},
   data () {
     return {
       navElements: [

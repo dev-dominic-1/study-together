@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AboutView from "../views/AboutView.vue";
+import AccountView from "../views/AccountView.vue";
 
 Vue.use(VueRouter)
 
@@ -31,9 +31,9 @@ export const routes = [
     disabled: true
   },
   {
-    path: '/account',
-    name: 'Account',
-    component: AboutView,
+    path: '/profile',
+    name: 'Profile',
+    component: AccountView,
     icon: 'mdi-account-circle-outline'
   },
   {
