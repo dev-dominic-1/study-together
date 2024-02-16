@@ -1,7 +1,7 @@
 # study-together
 
 ## Project Credits
-Design documents provided on Figma by my wife, Cassidy Voorhees-Hiland, UI/UX professional.
+Design documents provided on Figma by my wife, Cassidy Voorhees-Hiland, certified UI designer.
 
 ## Project setup
 ```
