@@ -156,7 +156,7 @@ export default {
     &>img {
       height: 100%;
       width: 100%;
-      border-radius: 10px;
+      border-radius: 5px;
     }
   }
   &>.bio-title {
