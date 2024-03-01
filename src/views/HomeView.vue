@@ -1,14 +1,34 @@
 <template>
   <div class="home">
-    <v-toolbar elevation="1" color="transparent" height="96px" class="toolbar">
+    <v-toolbar
+      elevation="1"
+      color="transparent"
+      height="96px"
+      class="toolbar"
+    >
       <v-row no-gutters>
         <v-spacer />
-        <v-col cols="12" md="10" class="pb-0 mb-n16">
-          <v-tabs v-model="tab" color="text" background-color="transparent">
-            <v-tab class="text-capitalize heading-2" :key="TRENDING" disabled>
+        <v-col
+          cols="12"
+          md="10"
+          class="pb-0 mb-n16"
+        >
+          <v-tabs
+            v-model="tab"
+            color="text"
+            background-color="transparent"
+          >
+            <v-tab
+              class="text-capitalize heading-2"
+              :key="TRENDING"
+              disabled
+            >
               {{ TRENDING.toLowerCase() }}
             </v-tab>
-            <v-tab class="text-capitalize heading-2" :key="FRIENDS">
+            <v-tab
+              class="text-capitalize heading-2"
+              :key="FRIENDS"
+            >
               {{ FRIENDS.toLowerCase() }}
             </v-tab>
           </v-tabs>
@@ -16,14 +36,20 @@
         <v-spacer />
       </v-row>
     </v-toolbar>
-    <v-tabs-items v-model="tab" style="background-color: transparent">
-        <v-tab-item :key="TRENDING">
-          {{ TRENDING }}
-        </v-tab-item>
+    <v-tabs-items
+      v-model="tab"
+      style="background-color: transparent"
+    >
+      <v-tab-item :key="TRENDING">
+        {{ TRENDING }}
+      </v-tab-item>
       <v-tab-item :key="FRIENDS">
         <v-row no-gutters>
           <v-spacer />
-          <v-col cols="12" md="10">
+          <v-col
+            cols="12"
+            md="10"
+          >
             <v-autocomplete
               v-model="contentPreference"
               :items="[

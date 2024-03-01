@@ -1,33 +1,60 @@
 <template>
-  <v-card elevation="3" color="background" class="wrapper mx-3 mt-n2 mb-5" min-height="450px">
+  <v-card
+    elevation="3"
+    color="background"
+    class="wrapper mx-3 mt-n2 mb-5"
+    min-height="450px"
+  >
     <v-card-title class="d-flex align-center justify-space-between">
       <div class="d-flex">
         <v-avatar>
-          <v-img :src="userImage" :alt="`${user.name} Post`" />
+          <v-img
+            :src="userImage"
+            :alt="`${user.name} Post`"
+          />
         </v-avatar>
         <div class="d-flex flex-column">
           <span class="body-1">{{ user.name }}</span>
           <span class="body-2 timestamp">{{ post.timestamp }}</span>
         </div>
       </div>
-      <post-stat v-if="post.stat" :type="post.stat" />
+      <post-stat
+        v-if="post.stat"
+        :type="post.stat"
+      />
     </v-card-title>
     <v-card-text class="px-6">
       <span class="text--text">{{ post.content }}</span>
-      <v-row no-gutters class="pt-6" style="height: 100%">
-        <v-col cols="6" class="px-3">
-          <v-sheet height="calc(100% - 4px)" class="d-flex align-center justify-center">
+      <v-row
+        no-gutters
+        class="pt-6"
+        style="height: 100%"
+      >
+        <v-col
+          cols="6"
+          class="px-3"
+        >
+          <v-sheet
+            height="calc(100% - 4px)"
+            class="d-flex align-center justify-center"
+          >
             Image 1
           </v-sheet>
         </v-col>
-        <v-col cols="6" class="px-3">
-          <v-sheet height="calc(100% - 4px)" class="d-flex align-center justify-center">
+        <v-col
+          cols="6"
+          class="px-3"
+        >
+          <v-sheet
+            height="calc(100% - 4px)"
+            class="d-flex align-center justify-center"
+          >
             Image 2
           </v-sheet>
         </v-col>
       </v-row>
     </v-card-text>
-<!--    <hr class="divider">-->
+    <!--    <hr class="divider">-->
     <v-card-actions class="justify-space-between top-shadow">
       <v-icon>mdi-heart</v-icon>
       <span class="body-1">Comment</span>

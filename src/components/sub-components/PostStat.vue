@@ -1,5 +1,8 @@
 <template>
-  <v-hover class="wrapper" #default="{ hover }">
+  <v-hover
+    class="wrapper"
+    #default="{ hover }"
+  >
     <div
       class="d-flex align-center elevation-2"
       :style="{

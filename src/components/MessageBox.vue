@@ -1,11 +1,17 @@
 <template>
-  <div class="wrapper px-4 secondary-accent-2 body-4 elevation-2" :class="{open}">
+  <div
+    class="wrapper px-4 secondary-accent-2 body-4 elevation-2"
+    :class="{open}"
+  >
     <div
       class="d-flex align-center justify-space-between"
       @click="open = !open"
     >
       Messages
-      <v-btn icon @click.stop="open = !open">
+      <v-btn
+        icon
+        @click.stop="open = !open"
+      >
         <v-icon :class="{rotated: open}">
           mdi-chevron-up
         </v-icon>

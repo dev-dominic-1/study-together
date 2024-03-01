@@ -1,9 +1,15 @@
 <template>
   <div class="about">
     <div class="header" />
-    <v-row no-gutters style="min-height: 200px">
+    <v-row
+      no-gutters
+      style="min-height: 200px"
+    >
       <v-spacer />
-      <v-col cols="12" md="10">
+      <v-col
+        cols="12"
+        md="10"
+      >
         <v-sheet class="bio-wrapper">
           <div
             class="profile-image"
@@ -17,7 +23,10 @@
             >
           </div>
           <v-row no-gutters>
-            <div :style="{'padding-left': PROFILE_PIC_AVOIDANCE_PADDING, width: '100%'}" class="d-flex justify-space-between">
+            <div
+              :style="{'padding-left': PROFILE_PIC_AVOIDANCE_PADDING, width: '100%'}"
+              class="d-flex justify-space-between"
+            >
               <div class="bio-title">
                 <div class="heading-3">{{ user.name }}</div>
                 <div>{{ user.university }}</div>
@@ -43,7 +52,10 @@
             </div>
           </v-row>
           <v-row no-gutters>
-            <div class="pt-4" :style="{'padding-left': PROFILE_PIC_AVOIDANCE_PADDING}">
+            <div
+              class="pt-4"
+              :style="{'padding-left': PROFILE_PIC_AVOIDANCE_PADDING}"
+            >
               {{ user.bio }}
             </div>
           </v-row>
@@ -53,7 +65,10 @@
     </v-row>
     <v-row no-gutters>
       <v-spacer />
-      <v-col cols="4" class="px-3">
+      <v-col
+        cols="4"
+        class="px-3"
+      >
         <div class="d-flex justify-space-between">
           <div>
             <div class="heading-1">Friends</div>
@@ -62,7 +77,10 @@
           <span class="body-4">See All Friends</span>
         </div>
       </v-col>
-      <v-col cols="6" class="px-3">
+      <v-col
+        cols="6"
+        class="px-3"
+      >
         <span class="heading-1">Posts</span>
       </v-col>
       <v-spacer />
@@ -97,6 +115,7 @@
 
 import FriendCard from "@/components/FriendCard.vue";
 import PostCard from "@/components/PostCard.vue";
+import User from "@/models/User";
 
 const PROFILE_PIC_AVOIDANCE_PADDING = '272px'
 
@@ -120,6 +139,8 @@ export default {
       img.onload = () => this.profileImage = img
       img.src = r.default
     })
+    let user = new User(this).includeFriends(true).getById(this.$store.state.user.id)
+    console.log('USER PULLED', user)
   }
 }
 </script>

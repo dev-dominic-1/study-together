@@ -1,5 +1,8 @@
 <template>
-  <v-card min-height="200px" color="background">
+  <v-card
+    min-height="200px"
+    color="background"
+  >
     FRIEND
   </v-card>
 </template>

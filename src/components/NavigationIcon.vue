@@ -1,8 +1,17 @@
 <template>
   <div class="wrapper">
-    <v-icon large :color="disabled ? undefined : 'text'">{{ icon }}</v-icon>
-    <div v-if="selected" class="underline">
-      <v-icon large color="text">
+    <v-icon
+      large
+      :color="disabled ? undefined : 'text'"
+    >{{ icon }}</v-icon>
+    <div
+      v-if="selected"
+      class="underline"
+    >
+      <v-icon
+        large
+        color="text"
+      >
         mdi-minus
       </v-icon>
     </div>
