@@ -8,6 +8,8 @@ export default class ApiConnector {
   #endpoint
   #queryParameters
   #options = {mode: 'cors'}
+  #suppress
+  #suppressCritical
 
   /**
    * Initialize an ApiConnector with a given endpoint, additional path for url
@@ -24,8 +26,22 @@ export default class ApiConnector {
     this.#queryParameters = queryParameters
   }
 
+  getContext () {
+    return this.#context
+  }
+
   getQueryParameters () {
     return this.#queryParameters
+  }
+
+  suppressErrors (bool = true) {
+    this.#suppress = bool
+    return this
+  }
+
+  suppressCriticalErrors (bool = true) {
+    this.#suppressCritical = bool
+    return this
   }
 
   setQueryParameters (parameters = {}) {
@@ -43,7 +59,12 @@ export default class ApiConnector {
     return `${this.#url}${this.#endpoint}${this.#queryParameters?.toQueryString() ?? ''}`
   }
   async get () {
-    return await defaultResponseHandler(this.#context, fetch(this.#getQueryResource(), {...this.#options, method: 'GET'}))
+    return await defaultResponseHandler(
+      this.#context,
+      fetch(this.#getQueryResource(), {...this.#options, method: 'GET'}),
+      this.#suppress,
+      this.#suppressCritical
+    )
   }
 
   async save () {

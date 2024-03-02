@@ -15,7 +15,12 @@
             v-for="(el, index) of routes"
             :key="`nav-element-${index}`"
             :disabled="el.disabled"
-            @click="$router.push(el.path)"
+            @click="() => {
+              if (el.requireSignIn && !userSignedIn) {
+                signInDialogConfig.open = true
+                signInDialogConfig.callback = (user) => el.signInCallback(context, user)
+              } else $router.push(el.path)
+            }"
           >
             <v-list-item-content>
               <v-row
@@ -55,7 +60,10 @@
     </div>
     <message-box />
     <api-errors />
-    <sign-in-dialog v-model="showSignInDialog" />
+    <sign-in-dialog
+      v-model="signInDialogConfig.open"
+      @success="signInDialogConfig.callback($event)"
+    />
   </v-app>
 </template>
 
@@ -64,20 +72,23 @@ import {routes} from "@/router";
 import NavigationIcon from "@/components/NavigationIcon.vue";
 import MessageBox from "@/components/MessageBox.vue";
 import ApiErrors from "@/components/ApiErrors.vue";
+import SignInDialog from "@/components/sign-in/SignInDialog.vue";
 export default {
-  components: {MessageBox, NavigationIcon, ApiErrors},
+  components: {SignInDialog, MessageBox, NavigationIcon, ApiErrors},
   data () {
     return {
-      showSignInDialog: false,
+      signInDialogConfig: {
+        open: false,
+        callback: () => {},
+      },
     }
   },
   mounted () {
-    const {id: currentUserId} = this.$store.state.user
-    if (currentUserId == null) {
-      this.showSignInDialog = true
-    }
+    this.$store.commit('setUser', {})
   },
   computed: {
+    context () {return this},
+    userSignedIn () {return !!this.$store.state.user?.id},
     routes () {return routes},
     themeStyleObject () {
       const theme = this.$vuetify.theme.currentTheme
@@ -85,6 +96,14 @@ export default {
         background: theme.background,
         color: theme.text
       }
+    },
+    secondary () {
+      const theme = this.$vuetify.theme.currentTheme
+      return theme.secondary
+    },
+    text () {
+      const theme = this.$vuetify.theme.currentTheme
+      return theme.text
     }
   }
 }
@@ -97,6 +116,17 @@ body {
   &::-webkit-scrollbar {
     display: none !important;
   }
+}
+.v-text-field.v-text-field--outlined:not(.custom) .v-input__slot {
+  &>fieldset {
+    border: 2px solid v-bind(secondary);
+  }
+  & label {
+    color: v-bind(text);
+  }
+}
+.v-btn {
+  text-transform: capitalize;
 }
 #app {
   & .timestamp {

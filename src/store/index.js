@@ -18,19 +18,23 @@ const store = new Vuex.Store({
     addApiError (state, error = '') {
       state.apiErrors.push(error)
     },
+    addApiErrors (state, ...errors) {
+      state.apiErrors.push(...errors)
+    },
     removeApiError (state, index) {
       state.apiErrors.splice(index, 1)
     },
     clearApiErrors (state) {
       state.apiErrors = []
     },
+    setUser (state, apiUser) {
+      state.user = apiUser
+    }
   },
   state () {
     return {
       apiErrors: [],
-      user: {
-        id: 31
-      },
+      user: {},
       // user: {
       //   name: 'Troy Bennett',
       //   username: 'troy',

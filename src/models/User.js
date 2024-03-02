@@ -20,7 +20,7 @@ export default class User extends ApiConnector {
   }
 
   async getById (id) {
-    if (isNaN(id)) throw '`id` parameter must be a number'
+    if (isNaN(id)) this.getContext().$store.commit('setApiErrors', ['`id` parameter must be a number'])
     this.withAdditionalUrl(`${id}/include`)
     this.setQueryParameters({includeFriends: this.#includeFriends, includePosts: this.#includePosts})
     return await this.get()

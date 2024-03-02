@@ -67,7 +67,7 @@
         "singleline": "never",
         "multiline": "always"
       }],
-      "vue/script-indent": ["error", 2, {"switchCase": 2}]
+      "vue/script-indent": ["error", 2, {"switchCase": 1}]
     }
   },
   "browserslist": [

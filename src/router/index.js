@@ -34,7 +34,11 @@ export const routes = [
     path: '/profile',
     name: 'Profile',
     component: AccountView,
-    icon: 'mdi-account-circle-outline'
+    icon: 'mdi-account-circle-outline',
+    requireSignIn: true,
+    signInCallback: (context, user) => {
+      context.$store.commit('setUser', user)
+    }
   },
   {
     path: '/create-post',
