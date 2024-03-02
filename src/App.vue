@@ -60,10 +60,20 @@
     </div>
     <message-box />
     <api-errors />
-    <sign-in-dialog
-      v-model="signInDialogConfig.open"
-      @success="signInDialogConfig.callback($event)"
-    />
+    <component-refresher
+      #default="{ refreshKey }"
+      ref="signInDialog"
+      unique-key-prefix="sign-in"
+    >
+      <sign-in-dialog
+        v-model="signInDialogConfig.open"
+        :key="refreshKey"
+        @success="signInDialogConfig.callback($event)"
+        @input="v => {
+          if (!v) $refs.signInDialog.refresh(200)
+        }"
+      />
+    </component-refresher>
   </v-app>
 </template>
 
@@ -73,8 +83,9 @@ import NavigationIcon from "@/components/NavigationIcon.vue";
 import MessageBox from "@/components/MessageBox.vue";
 import ApiErrors from "@/components/ApiErrors.vue";
 import SignInDialog from "@/components/sign-in/SignInDialog.vue";
+import ComponentRefresher from "@/components/core/ComponentRefresher.vue";
 export default {
-  components: {SignInDialog, MessageBox, NavigationIcon, ApiErrors},
+  components: {ComponentRefresher, SignInDialog, MessageBox, NavigationIcon, ApiErrors},
   data () {
     return {
       signInDialogConfig: {
@@ -111,13 +122,14 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+//noinspection ALL
 body {
   scrollbar-width: 0;
   &::-webkit-scrollbar {
     display: none !important;
   }
 }
-.v-text-field.v-text-field--outlined:not(.custom) .v-input__slot {
+.v-text-field.v-text-field--outlined:not(.custom, .error--text) .v-input__slot {
   &>fieldset {
     border: 2px solid v-bind(secondary);
   }

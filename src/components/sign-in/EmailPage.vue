@@ -3,13 +3,14 @@
     <span class="heading-2">Welcome to Study Together!</span>
     <v-form ref="form">
       <v-text-field
-        v-model="$formData().email"
+        v-model="formData.email"
         label="Email"
         color="secondary"
         outlined
         class="pt-6"
         :rules="[
-          (v) => {return !v.includes('@') || !v.split('@')[1]?.includes('.') || 'Please enter a valid email address'}
+          (v) => {return !!v.length || 'Email is required'},
+          (v) => {return (v.includes('@') && v.split('@')[1]?.includes('.')) || 'Please enter a valid email address'}
         ]"
         hide-details="auto"
       />
@@ -18,7 +19,7 @@
       class="secondary background--text mt-4"
       block
       x-large
-      @click="doUserLookup($formData().email)"
+      @click="doUserLookup(formData.email)"
     >
       Continue
     </v-btn>
@@ -73,6 +74,17 @@ export default {
   name: 'EmailPage',
   components: {WipTooltip},
   inject: ['$formData', '$tabKeys'],
+  computed: {
+    formData () {return this.$formData()}
+  },
+  watch: {
+    formData: {
+      handler () {
+        this.$refs.form?.resetValidation()
+      },
+      deep: true
+    }
+  },
   methods: {
     async doUserLookup (email) {
       if (!this.$refs.form.validate()) return
