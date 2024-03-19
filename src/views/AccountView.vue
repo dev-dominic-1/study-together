@@ -124,7 +124,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .about {
   width: 100%;
   background: url(../assets/Images/Desktop/Profile/Background/ellipse-bottom.png),

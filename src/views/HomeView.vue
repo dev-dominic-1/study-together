@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home {
   width: 100%;
   background: url(../assets/Images/Desktop/Home/Background/ellipse-left-bottom.png) no-repeat fixed,

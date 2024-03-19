@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .wrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
